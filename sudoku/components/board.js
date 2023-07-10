@@ -4,7 +4,7 @@ export default function board( {props} ){
             <p>Board:</p>
             <p>{props}</p>
 
-            //Add
+            
         </>
     )
 
