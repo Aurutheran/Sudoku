@@ -3,7 +3,7 @@ import Board from "../../components/board";
 export default function SudokuComponent({ solvedBoard, board }) {
   return (
     <>
-      <Board props={board} />
+      <Board board={board} solved={solvedBoard} />
     </>
   );
 }
