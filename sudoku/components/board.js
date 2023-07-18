@@ -13,16 +13,11 @@ export default function Board(data) {
         board.map( function(row){
           return  row.map(function(cells){
             return (<div className={style.box}>
-                <p>cells</p>
+                <p>{cells}</p>
             </div>)
           })
         })
       }
     </>
   );
-}
-            
-        </>
-    )
-
 }
