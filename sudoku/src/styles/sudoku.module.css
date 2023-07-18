@@ -1,8 +1,50 @@
-.box{
-    width:25px;
-    width:25px;
-    float:left;
+/* sudoku.module.css */
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+.box {
+    width: 25px;
+    height: 25px;
     text-align: center;
     vertical-align: middle;
     position: relative;
-}
+  }
+  
+  .gridContainer {
+    width:fit-content;
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    grid-template-rows: repeat(9, 1fr);
+    gap: 2px; /* Add some spacing between the cells if desired */
+    
+  }
+  
+  .gridContainer > .box {
+    width: 50px;
+    height: 50px;
+    background-color: plum;
+  }
+  .gridContainer > .correctbox {
+    width: 50px;
+    height: 50px;
+    background-color: whitesmoke;
+  }
+
+  
+
+  .box, .correctbox{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    font-size:20px;
+    font-family: Roboto, sans-serif;
+  }
+  .box > input{
+    border:none;
+    width:40%;
+    outline:none;
+    margin:auto;
+    text-align: center;
+    background-color: transparent;
+    font-size:20px;
+    font-family: Roboto, sans-serif;
+  }
+  
