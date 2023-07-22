@@ -12,7 +12,7 @@ export default function Board(data) {
       <div className={style.gridContainer}>
         {board.map(function (row, rowIndex) {
           return row.map(function (cell, cellIndex) {
-
+            console.log(cellIndex)
             if(cell == 0){
               return(
                 <div key={cellIndex} className={style.box}>
