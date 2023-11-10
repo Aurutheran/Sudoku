@@ -1,36 +1,68 @@
 import style from "../src/styles/sudoku.module.css";
+import { fillGrid } from "../utils/sudokuUtils";
+import { useState, useEffect } from "react";
 export default function Board(data) {
-  const board = data.board;
+  const initialBoard = [].concat(...data.board);
   const solved = data.solved;
+
+  const [sudokuValues, setSudokuValues] = useState(initialBoard); //Initialize sudokuValue's with board
+  const [sudokuGrid, setSudokuGrid] = useState(() => fillGrid(initialBoard));
+
+  const updateCellValue = (row, col, value) => {
+    if (initialBoard[row * 9 + col] === 0) {
+      const newSudokuValues = [...sudokuValues];
+      newSudokuValues[row * 9 + col] = value;
+      setSudokuValues(newSudokuValues);
+      const newSudokuGrid = fillGrid(newSudokuValues);
+      setSudokuGrid(newSudokuGrid);
+    }
+  };
+
+  const handleCellChange = (row, col, e) =>{
+    const newValue = Math.abs(parseInt(e.target.value, 10) || 0) % 10;
+    updateCellValue(row, col, newValue);
+  };
+
+  // useEffect( () => {
+  //   const flattenedGrid = [].concat(...sudokuGrid);
+  //   setSudokuValues(flattenedGrid);
+  // }, [sudokuGrid]);
+  
+  const renderSudokuBoard = () => {
+    return(
+      <table>
+        <tbody>
+          {
+            sudokuGrid.map((row, rowIndex) => (
+              <tr key={rowIndex}>
+                {row.map((cellValue, colIndex) => (
+                  <td key={colIndex}>
+                    <input
+                    type="number"
+                    value={cellValue || ''}
+                    onChange={(e) => handleCellChange(rowIndex, colIndex, e)}
+                    readOnly={initialBoard[rowIndex * 9 + colIndex] !== 0} />
+                  </td>
+                ))}
+              </tr>
+            ))}
+        </tbody>
+      </table>
+    );
+  };
+
   return (
-    <>
+    <div>
       <p>Board:</p>
-      <p>{board}</p>
+      <p>{initialBoard}</p>
+
+      <p>Updated Board: </p>
+      <p>{sudokuValues}</p>
       <p>Solved Board:</p>
       <p>{solved}</p>
 
-      <div className={style.gridContainer}>
-        {board.map(function (row, rowIndex) {
-          return row.map(function (cell, cellIndex) {
-            console.log(cellIndex)
-            if(cell == 0){
-              return(
-                <div key={cellIndex} className={style.box}>
-                  <input maxLength="1" />
-                </div>
-              );
-            }
-            else{
-              return (
-                <div key={cellIndex} className={style.correctbox}>
-                  <p>{cell}</p>
-                </div>
-              );
-            }
-            
-          });
-        })}
-      </div>
-    </>
+      {renderSudokuBoard()}
+      
+    </div>
   );
 }
