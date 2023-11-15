@@ -1,9 +1,18 @@
+"use client";
 import React from "react";
+import { useState } from "react";
 import Board from "../../components/board";
+import Condition from "../../components/condition";
+
 export default function SudokuComponent({ solvedBoard, board }) {
+  const [currentBoard, setCurrentBoard] = useState(0);
+  const [initialBoard, setInitialBoard] = useState(board);
+  const [finalBoard, setFinalBoard] = useState(solvedBoard);
+
   return (
     <>
-      <Board board={board} solved={solvedBoard} />
+      <Board board={board} solved={solvedBoard} current={currentBoard}/>
+      <Condition grid={currentBoard}/>
     </>
   );
 }
@@ -99,17 +108,16 @@ function generateSudoku() {
     board[row][col] = 0;
   }
 
+
   return { solvedBoard, board };
 }
 
 export async function getServerSideProps() {
-  
-
   // Generate a Sudoku board
   const { solvedBoard, board } = generateSudoku();
 
-  return{
-    props:{
+  return {
+    props: {
       solvedBoard: solvedBoard,
       board: board,
     },

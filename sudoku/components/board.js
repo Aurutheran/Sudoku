@@ -1,5 +1,4 @@
 import style from "../src/styles/sudoku.module.css";
-import Condition from "./condition";
 
 import { fillGrid } from "../utils/sudokuUtils";
 import { useState, useEffect } from "react";
@@ -17,6 +16,7 @@ export default function Board(data) {
       setSudokuValues(newSudokuValues);
       const newSudokuGrid = fillGrid(newSudokuValues);
       setSudokuGrid(newSudokuGrid);
+      data.current = sudokuGrid;
     }
   };
 
@@ -64,8 +64,6 @@ export default function Board(data) {
       <p>{solved}</p>
 
       {renderSudokuBoard()}
-
-      <Condition grid={sudokuGrid}/>
       
     </div>
   );
