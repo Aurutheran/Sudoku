@@ -1,7 +1,7 @@
 import style from "../src/styles/sudoku.module.css";
 
 import { fillGrid } from "../utils/sudokuUtils";
-import { useState, useEffect } from "react";
+import { useEffect, useState} from "react";
 export default function Board(data) {
   const initialBoard = [].concat(...data.board);
   const solved = data.solved;
@@ -16,19 +16,20 @@ export default function Board(data) {
       setSudokuValues(newSudokuValues);
       const newSudokuGrid = fillGrid(newSudokuValues);
       setSudokuGrid(newSudokuGrid);
-      data.current = sudokuGrid;
+      
     }
   };
+  useEffect( () => {
+    data.onDataUpdate(sudokuGrid);
+  }, [sudokuGrid]);
+
 
   const handleCellChange = (row, col, e) =>{
     const newValue = Math.abs(parseInt(e.target.value, 10) || 0) % 10;
     updateCellValue(row, col, newValue);
   };
 
-  // useEffect( () => {
-  //   const flattenedGrid = [].concat(...sudokuGrid);
-  //   setSudokuValues(flattenedGrid);
-  // }, [sudokuGrid]);
+
   
   const renderSudokuBoard = () => {
     return(

@@ -5,13 +5,15 @@ import Board from "../../components/board";
 import Condition from "../../components/condition";
 
 export default function SudokuComponent({ solvedBoard, board }) {
-  const [currentBoard, setCurrentBoard] = useState(0);
-  const [initialBoard, setInitialBoard] = useState(board);
-  const [finalBoard, setFinalBoard] = useState(solvedBoard);
+  const [currentBoard, setCurrentBoard] = useState(board);
+
+  const handleDataFromChild = newData => {
+    setCurrentBoard(newData);
+  };
 
   return (
     <>
-      <Board board={board} solved={solvedBoard} current={currentBoard}/>
+      <Board board={board} solved={solvedBoard} onDataUpdate={handleDataFromChild}/>
       <Condition grid={currentBoard}/>
     </>
   );
