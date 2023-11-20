@@ -15,7 +15,7 @@ export default function Board(data) {
       newSudokuValues[row * 9 + col] = value;
       setSudokuValues(newSudokuValues);
       const newSudokuGrid = fillGrid(newSudokuValues);
-      setSudokuGrid(newSudokuGrid);
+      setSudokuGrid(newSudokuGrid);//
       
     }
   };
