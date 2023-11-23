@@ -98,7 +98,7 @@ function generateSudoku() {
   const solvedBoard = JSON.parse(JSON.stringify(board));
 
   // Generate a playable Sudoku board by removing some squares
-  const emptySquares = 45; // Adjust the number of empty squares as desired
+  const emptySquares = 1; // Adjust the number of empty squares as desired --Default 45
 
   for (let i = 0; i < emptySquares; i++) {
     let row, col;
