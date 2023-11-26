@@ -32,27 +32,39 @@ export default function Board(data) {
 
   
   const renderSudokuBoard = () => {
-    return(
-      <table>
+    return (
+      <table className="mx-auto border-collapse border-4 border-solid border-black shadow-xl shadow-slate-900/50 bg-white">
         <tbody>
-          {
-            sudokuGrid.map((row, rowIndex) => (
-              <tr key={rowIndex}>
-                {row.map((cellValue, colIndex) => (
-                  <td key={colIndex}>
-                    <input
+          {sudokuGrid.map((row, rowIndex) => (
+            <tr key={rowIndex}>
+              {row.map((cellValue, colIndex) => (
+                <td
+                  key={colIndex}
+                  className={`w-10 h-10 ${colIndex % 3 === 0 ? 'border-l-4' : ''} ${
+                    rowIndex % 3 === 0 ? 'border-t-4' : ''
+                  } border-black`}
+                >
+                  <input
+                    className={`w-20 h-20 text-center text-xl ${
+                      initialBoard[rowIndex * 9 + colIndex] !== 0
+                        ? 'text-gray-700 font-bold drop-shadow-xl' // Add special styles for initial values
+                        : 'text-black font-bold drop-shadow-xl shadow-blue-600/50'
+                    }`}
                     type="number"
                     value={cellValue || ''}
                     onChange={(e) => handleCellChange(rowIndex, colIndex, e)}
-                    readOnly={initialBoard[rowIndex * 9 + colIndex] !== 0} />
-                  </td>
-                ))}
-              </tr>
-            ))}
+                    readOnly={initialBoard[rowIndex * 9 + colIndex] !== 0}
+                  />
+                </td>
+              ))}
+            </tr>
+          ))}
         </tbody>
       </table>
     );
   };
+  
+  
 
   return (
     <div>

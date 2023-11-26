@@ -12,10 +12,10 @@ export default function SudokuComponent({ solvedBoard, board }) {
   };
 
   return (
-    <>
+    <div className="flex flex-col justify-center items-center">
       <Board board={board} solved={solvedBoard} onDataUpdate={handleDataFromChild}/>
       <Condition grid={currentBoard}/>
-    </>
+    </div>
   );
 }
 
@@ -98,7 +98,7 @@ function generateSudoku() {
   const solvedBoard = JSON.parse(JSON.stringify(board));
 
   // Generate a playable Sudoku board by removing some squares
-  const emptySquares = 1; // Adjust the number of empty squares as desired --Default 45
+  const emptySquares = 12; // Adjust the number of empty squares as desired --Default 45
 
   for (let i = 0; i < emptySquares; i++) {
     let row, col;
