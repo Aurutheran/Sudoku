@@ -14,10 +14,10 @@ export default function SudokuComponent({ solvedBoard, board }) {
   return (
     <div className="flex flex-col justify-center items-center">
       <Board board={board} solved={solvedBoard} onDataUpdate={handleDataFromChild}/>
-      <Condition grid={currentBoard}/>
+      <Condition grid={currentBoard}/> 
     </div>
   );
-}
+} //
 
 function generateSudoku() {
   const board = [];
